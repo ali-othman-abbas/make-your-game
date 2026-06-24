@@ -1,27 +1,37 @@
 type Key =
-  | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m"
-  | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
-  | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M"
-  | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
-  | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
-  | "`" | "~" | "!" | "@" | "#" | "$" | "%" | "^" | "&" | "*" | "(" | ")"
-  | "-" | "_" | "=" | "+" | "[" | "{" | "]" | "}" | "\\" | "|" | ";" | ":"
-  | "'" | "\"" | "," | "<" | "." | ">" | "/" | "?"
-  | " " | "Enter" | "Tab" | "Backspace" | "Escape" | "Delete" | "Insert"
+  | "KeyA" | "KeyB" | "KeyC" | "KeyD" | "KeyE" | "KeyF" | "KeyG" | "KeyH" | "KeyI"
+  | "KeyJ" | "KeyK" | "KeyL" | "KeyM" | "KeyN" | "KeyO" | "KeyP" | "KeyQ" | "KeyR"
+  | "KeyS" | "KeyT" | "KeyU" | "KeyV" | "KeyW" | "KeyX" | "KeyY" | "KeyZ"
+  | "Digit0" | "Digit1" | "Digit2" | "Digit3" | "Digit4"
+  | "Digit5" | "Digit6" | "Digit7" | "Digit8" | "Digit9"
+  | "Backquote" | "Minus" | "Equal" | "BracketLeft" | "BracketRight"
+  | "Backslash" | "Semicolon" | "Quote" | "Comma" | "Period" | "Slash"
+  | "Space" | "Enter" | "Tab" | "Backspace" | "Escape" | "Delete" | "Insert"
   | "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight"
   | "Home" | "End" | "PageUp" | "PageDown"
-  | "Shift" | "Control" | "Alt" | "Meta" | "CapsLock"
+  | "ShiftLeft" | "ShiftRight" | "ControlLeft" | "ControlRight"
+  | "AltLeft" | "AltRight" | "MetaLeft" | "MetaRight" | "CapsLock"
   | "F1" | "F2" | "F3" | "F4" | "F5" | "F6"
   | "F7" | "F8" | "F9" | "F10" | "F11" | "F12";
 const keyPressed = new Set<Key>();
+const keyConsumed = new Set<Key>();
 
 window.addEventListener('keydown', e => {
-  keyPressed.add(e.key as Key);
+  keyPressed.add(e.code as Key);
 })
 window.addEventListener('keyup', e => {
-  keyPressed.delete(e.key as Key);
+  keyPressed.delete(e.code as Key);
+  keyConsumed.delete(e.code as Key)
 })
 export function isKeyDown(k: Key): boolean {
   return keyPressed.has(k)
+}
+
+export function wasKeyPressed(k: Key): boolean {
+  if (keyPressed.has(k) && !keyConsumed.has(k)) {
+    keyConsumed.add(k);
+    return true;
+  }
+  return false;
 }
 
