@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+.game {
+    width: 100vw;
+    height: 100vh;
+    background-color: lightblue;
+}
+
+.duck {
+    position: absolute;
+    background-color: yellow;
+    width: 50px;
+    height: 50px;
+}
+
+.crossHair {
+    position: absolute;
+    font-size: 32px;
+}
+
