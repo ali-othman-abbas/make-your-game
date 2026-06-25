@@ -1,15 +1,18 @@
-import * as engine from "../gameEngine/engine.js"
-import Duck from "./entities/duck.js"
+import * as engine from "../gameEngine/engine.js";
+import * as input from "../gameEngine/input.js";
+import Duck from "./entities/duck.js";
 import CrossHair from "./entities/crossHair.js";
-import DrawComponent from "./components/DrawComponent.js";
+import DrawComponent from "../gameEngine/components/DrawComponent.js";
 import Vec from "./math/vector.js";
-import * as input from "../gameEngine/input.js"
-import type { boundable } from "./entities/utils.js";
+import { bothIntersect } from "../gameEngine/collision.js";
+import * as hud from "./hud.js";
 
 export default class Game implements engine.Game {
   duck: Duck;
   crossHair: CrossHair;
   bullets: number = 3;
+  kills: number = 0;
+  SinceShot: number = -1;
 
   constructor(gameRoot: HTMLElement) {
     this.duck = new Duck(new DrawComponent(gameRoot));
@@ -19,19 +22,21 @@ export default class Game implements engine.Game {
     );
   }
   update() {
+    if (this.SinceShot > -1 && performance.now() - this.SinceShot >= 200) {
+      hud.endImpactFrame();
+      this.SinceShot = -1;
+      return;
+    }
     if (input.wasKeyPressed("Space") && this.bullets > 0) {
-      this.bullets--;
-      console.log(this.bullets)
-      if (
-        this.isIntersect(this.crossHair, this.duck)
-      ) {
+      this.shoot();
+      if (bothIntersect(this.crossHair, this.duck)) {
+        this.kills++;
         this.duck.spawn();
-        this.bullets = 3;
+        this.reload();
       }
     }
     this.crossHair.update();
     this.duck.update();
-    
   }
 
   render() {
@@ -39,16 +44,19 @@ export default class Game implements engine.Game {
     this.duck.render();
   }
 
-
-  private isIntersect(entity1: boundable, entity2: boundable): boolean {
-    const a = entity1.getBoundingBox();
-    const b = entity2.getBoundingBox();
-    return (
-      a.left < b.right &&
-      a.right > b.left &&
-      a.top < b.bottom &&
-      a.bottom > b.top
+  private shoot() {
+    this.bullets--;
+    hud.setScore(this.kills);
+    hud.displayAvailableBullets(this.bullets);
+    hud.PutImpactFrame(
+      this.crossHair.position,
+      this.crossHair.width,
+      this.crossHair.height,
     );
+    this.SinceShot = performance.now()
   }
-
+  private reload() {
+    this.bullets = 3;
+    hud.displayAvailableBullets(this.bullets);
+  }
 }

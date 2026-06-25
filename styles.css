@@ -4,10 +4,55 @@
     margin: 0px;
 }
 
-.game {
+body {
     width: 100vw;
     height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.game {
+    position: relative;
+    width: 100%;
+    height: 100%;
     background-color: lightblue;
+}
+
+.scoreText {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    color: white;
+    font-size: 3rem;
+}
+
+.bullets {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    height: 100px;
+    display: flex;
+    gap: 10px;
+}
+
+.bullet {
+    height: 100%;
+    width: 20px;
+    background-color: white;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+
+.impactFrame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+}
+
+.flash {
+    background-color: white;
 }
 
 .duck {

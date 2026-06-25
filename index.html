@@ -4,10 +4,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@200..800&display=swap">
         <title>Document</title>
     </head>
     <body>
         <div class="game"></div>
+        <div class="bullets">
+            <span class="scoreText">
+                killed:
+                <span id="score">0</span>
+            </span>
+            <div class="bullet"></div>
+            <div class="bullet"></div>
+            <div class="bullet"></div>
+        </div>
+        <div hidden class="impactFrame">
+            <div class="flash"></div>
+        </div>
     </body>
     <script type="module" src="./dist/src.js"></script>
 </html>

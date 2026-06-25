@@ -1,10 +1,10 @@
 import Vec  from "../math/vector.js";
-import type { boundable, box } from "./utils.js";
+import type { Boundable, Box } from "../../gameEngine/collision.js";
 import * as input from "../../gameEngine/input.js"
-import type DrawComponent from "../components/DrawComponent.js";
+import type DrawComponent from "../../gameEngine/components/DrawComponent.js";
 
 
-export default class CrossHair implements boundable {
+export default class CrossHair implements Boundable {
   position: Vec;
   speed: number = 5;
   drawComp: DrawComponent;
@@ -50,7 +50,7 @@ export default class CrossHair implements boundable {
     this.drawComp.moveTo(x, y);
   }
 
-  getBoundingBox(): box {
+  getBoundingBox(): Box {
     return {
       top: this.position.y,
       bottom: this.position.y + this.height,

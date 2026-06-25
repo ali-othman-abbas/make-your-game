@@ -1,8 +1,8 @@
-import type DrawComponent from "../components/DrawComponent.js";
+import type DrawComponent from "../../gameEngine/components/DrawComponent.js";
 import Vec from "../math/vector.js";
-import { type boundable, type box } from "./utils.js";
+import type { Boundable, Box } from "../../gameEngine/collision.js";
 
-export default class Duck implements boundable {
+export default class Duck implements Boundable {
   position!: Vec;
   velocity!: Vec;
   baseSpeed: number = 5;
@@ -56,7 +56,7 @@ export default class Duck implements boundable {
     this.velocity = new Vec(Math.cos(angle), Math.sin(angle));
   }
 
-  getBoundingBox(): box {
+  getBoundingBox(): Box {
     return {
       top: this.position.y,
       bottom: this.position.y + this.height,
