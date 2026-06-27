@@ -19,7 +19,9 @@ export default class Duck implements Boundable {
     this.height = height;
     this.spawn();
     this.drawComp = drawComp;
-    this.drawComp.addClass("duck");
+    this.drawComp.setWidth(width);
+    this.drawComp.setHeight(height);
+    this.drawComp.setColor("yellow");
   }
 
   update() {

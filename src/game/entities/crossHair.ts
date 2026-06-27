@@ -1,8 +1,7 @@
-import Vec  from "../math/vector.js";
+import Vec from "../math/vector.js";
 import type { Boundable, Box } from "../../gameEngine/collision.js";
-import * as input from "../../gameEngine/input.js"
+import * as input from "../../gameEngine/input.js";
 import type DrawComponent from "../../gameEngine/components/DrawComponent.js";
-
 
 export default class CrossHair implements Boundable {
   position: Vec;
@@ -15,8 +14,10 @@ export default class CrossHair implements Boundable {
     this.width = width;
     this.height = height;
     this.drawComp = drawComp;
-    this.drawComp.setText("+");
-    this.drawComp.addClass("crossHair");
+    this.drawComp.setText("+", this.width);
+    this.drawComp.setForgroundColor('black');
+    this.drawComp.setWidth(width);
+    this.drawComp.setHeight(height);
   }
 
   update() {

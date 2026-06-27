@@ -1,13 +1,19 @@
-import type { Box } from "../gameEngine/collision.js";
 import Vec from "./math/vector.js";
 
-const bullets = document.querySelectorAll<HTMLHtmlElement>(".bullet")!;
-const score = document.querySelector<HTMLHtmlElement>("#score")!;
-const impactFrame = document.querySelector<HTMLHtmlElement>(".impactFrame")!;
-const flash = document.querySelector<HTMLHtmlElement>(".flash")!;
+
+const bullets = document.querySelectorAll<HTMLElement>(".bullet")!;
+const score = document.querySelector<HTMLElement>("#score")!;
+const fps = document.querySelector<HTMLElement>("#fps")!;
+const impactFrame = document.querySelector<HTMLElement>(".impactFrame")!;
+const flash = document.querySelector<HTMLElement>(".flash")!;
+
 
 export function setScore(num: number) {
   score.textContent = `${num}`;
+}
+
+export function setFPS(num: number) {
+  fps.textContent = `${num}`;
 }
 
 export function displayAvailableBullets(available: number) {
@@ -19,16 +25,3 @@ export function displayAvailableBullets(available: number) {
   }
 }
 
-export function PutImpactFrame({ x, y }: Vec, width: number, height: number) {
-  impactFrame.hidden = false;
-  flash.style.transform = `translate(${x}px, ${y}px)`;
-  flash.style.width = `${width}px`;
-  flash.style.height = `${height}px`;
-  return () => {
-    impactFrame.hidden = true;
-  };
-}
-
-export function endImpactFrame() {
-  impactFrame.hidden = true;
-}

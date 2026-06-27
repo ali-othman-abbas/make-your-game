@@ -1,25 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@200..800&display=swap">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
         <title>Document</title>
     </head>
     <body>
-        <div class="game"></div>
-        <div class="bullets">
-            <span class="scoreText">
-                killed:
-                <span id="score">0</span>
-            </span>
-            <div class="bullet"></div>
-            <div class="bullet"></div>
-            <div class="bullet"></div>
+        <div class="game">
+            <div id="duck"></div>
+            <div id="crossHair"></div>
+            <div class="hud">
+                <div class="topPart">
+                    <span class="fpsText"> fps: <span id="fps">0</span> </span>
+                    <span class="scoreText">
+                        killed: <span id="score">0</span>
+                    </span>
+                </div>
+                <div class="bullets">
+                    <div class="bullet"></div>
+                    <div class="bullet"></div>
+                    <div class="bullet"></div>
+                </div>
+            </div>
+            <div hidden class="impactFrame">
+                <div class="flash"></div>
+            </div>
         </div>
-        <div hidden class="impactFrame">
-            <div class="flash"></div>
+        <div class="game-start">
+            <div>
+                <div class="title">Block hunt</div>
+                <div class="start-game-button">Start Game</div>
+            </div>
+        </div>
+        <div hidden class="pause-menu">
+            <div>
+                <div class="pause-menu-title">Paused</div>
+                <div class="pause-buttons">
+                    <div class="pause-menu-continue-button">continue</div>
+                    <div class="pause-menu-restart-button">restart</div>
+                </div>
+            </div>
+        </div>
+        <div hidden class="game-over">
+            <div>
+                <div class="game-over-group">
+                    <div class="game-over-title">Game Over</div>
+                    <div class="game-over-ducks-killed-text">blocks killed: <span class="game-over-score"></span></div>
+                </div>
+                <div class="game-over-restart-button">try again</div>
+            </div>
         </div>
     </body>
     <script type="module" src="./dist/src.js"></script>

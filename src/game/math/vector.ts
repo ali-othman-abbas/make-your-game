@@ -1,4 +1,3 @@
-
 export default class Vec {
   x: number;
   y: number;
